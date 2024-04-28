@@ -1,22 +1,24 @@
 pipeline {
     agent any
-    
+
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from GitHub
-                git 'https://github.com/Adi12543/Devops.git'
-            }
-        }
-        
         stage('Deploy to XAMPP') {
             steps {
-                // Copy HTML files to XAMPP htdocs directory
-                bat 'xcopy /s /y .\\*.html "C:\xampp\htdocs"'
+                bat 'xcopy /E /Y .\\*.html "C:\\xampp\\htdocs\\"'
             }
         }
     }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
 }
+
 
 
 
