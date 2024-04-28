@@ -1,19 +1,26 @@
 pipeline {
     agent any
-
+    
+    environment {
+        XAMPP_PATH = 'C:\xampp\htdocs' // Provide the path to your XAMPP htdocs directory
+    }
+    
     stages {
-        stage('Checkout') {
+        stage('Clone repository') {
             steps {
-                // Checkout the code from the GitHub repository
-                git 'https://github.com/Aditi12543/Devops.git'
+                script {
+                    // Clone the GitHub repository
+                    git branch: 'master', url: 'https://github.com/Adi12543/Devops.git'
+                }
             }
         }
-
-        stage('Deploy') {
+        
+        stage('Deploy to XAMPP server') {
             steps {
-                // Copy HTML files to Xampp htdocs directory
-                sh 'cp *.html /opt/lampp/htdocs/'
+                // Copy HTML files to XAMPP htdocs directory
+                bat "xcopy /s /y .\\*.html \"${env.XAMPP_PATH}\""
             }
         }
     }
 }
+
