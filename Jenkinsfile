@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        XAMPP_PATH = 'YOUR_XAMPP_PATH' // Provide the path to your XAMPP htdocs directory
+        XAMPP_PATH = 'C:\xampp\htdocs' // Provide the path to your XAMPP htdocs directory
     }
     
     stages {
@@ -18,9 +18,9 @@ pipeline {
         stage('Deploy to XAMPP server') {
             steps {
                 // Copy HTML files to XAMPP htdocs directory
-                bat "xcopy /s /y index.html \"${env.XAMPP_PATH}\""
-                bat "xcopy /s /y about.html \"${env.XAMPP_PATH}\""
-                bat "xcopy /s /y contact.html \"${env.XAMPP_PATH}\""
+                bat "xcopy /s /y dwsample1-html.html \"${env.XAMPP_PATH}\""
+                bat "xcopy /s /y dwsample2-html.html \"${env.XAMPP_PATH}\""
+                bat "xcopy /s /y dwsample3-html.html \"${env.XAMPP_PATH}\""
             }
         }
     }
